@@ -3,41 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>LOGOS DUAL GENESIS-X2 | TOTAL INDUSTRIAL CONTROL</title>
+    <title>LOGOS DUAL GENESIS-X2 | INDUSTRIAL MASTER-LINK</title>
     <script src="https://cdn.jsdelivr.net/npm/@revenuecat/purchases-js@latest/dist/purchases.js"></script>
     <style>
         :root { --blue: #00d2ff; --green: #39ff14; --gold: #ffd700; --red: #ff3131; --bg: #000; }
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
-        body { background: var(--bg); color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; min-height: 100vh; display: flex; flex-direction: column; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { background: var(--bg); color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
         
-        header { background: #0a0a0a; padding: 25px 15px; border-bottom: 3px solid var(--blue); text-align: center; position: sticky; top: 0; z-index: 1000; }
-        .system-id { font-size: 0.65rem; color: var(--gold); letter-spacing: 4px; font-weight: bold; text-transform: uppercase; }
-        .app-title { font-size: 1.7rem; font-weight: 900; margin-top: 10px; text-shadow: 0 0 15px var(--blue); }
+        header { padding: 25px; border-bottom: 3px solid var(--blue); text-align: center; background: #0a0a0a; position: sticky; top: 0; z-index: 100; }
+        .system-id { font-size: 0.65rem; color: var(--gold); letter-spacing: 3px; font-weight: bold; text-transform: uppercase; }
+        .app-title { font-size: 1.6rem; font-weight: 900; margin-top: 8px; text-shadow: 0 0 15px var(--blue); }
 
-        .dashboard { flex: 1; padding: 15px; background: radial-gradient(circle at center, #111 0%, #000 100%); }
-        .card { background: rgba(10,10,10,0.95); border: 1px solid #222; border-radius: 20px; padding: 20px; margin-bottom: 25px; border-left: 8px solid var(--blue); box-shadow: 0 15px 35px rgba(0,0,0,0.8); }
+        .dashboard { flex: 1; padding: 15px; }
+        .card { background: #0d0d0d; border: 1px solid #222; border-radius: 20px; padding: 20px; margin-bottom: 25px; border-left: 8px solid var(--blue); box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
         .label { color: var(--gold); font-size: 0.8rem; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 15px; }
         
-        /* VALORI SI TERMINAL */
-        .val-display { font-family: 'Courier New', monospace; font-size: 2.2rem; color: var(--green); font-weight: 900; margin-bottom: 15px; }
-        .terminal { background: #000; border: 1px solid #1a1a1a; border-radius: 10px; padding: 15px; font-family: 'Courier New', monospace; font-size: 0.8rem; color: var(--green); height: 180px; overflow-y: hidden; margin-bottom: 20px; border-left: 3px solid var(--green); }
+        .val-big { font-family: 'Courier New', monospace; font-size: 2.1rem; color: var(--green); font-weight: 900; margin-bottom: 15px; }
+        .terminal { background: #000; border: 1px solid #1a1a1a; border-radius: 10px; padding: 15px; font-family: monospace; font-size: 0.8rem; color: var(--green); height: 160px; overflow-y: hidden; margin-bottom: 20px; border-left: 3px solid var(--green); }
         
-        /* GRILA CONTROL TOTAL */
-        .control-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .btn { background: #111; color: var(--blue); border: 2px solid var(--blue); padding: 20px; border-radius: 12px; font-size: 0.8rem; font-weight: 800; cursor: pointer; text-transform: uppercase; transition: all 0.2s; }
-        .btn:active { transform: scale(0.92); background: var(--blue); color: #000; }
+        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .btn { background: #111; color: var(--blue); border: 2px solid var(--blue); padding: 20px; border-radius: 12px; font-size: 0.8rem; font-weight: 800; cursor: pointer; text-transform: uppercase; transition: 0.2s; }
+        .btn:active { background: var(--blue); color: #000; transform: scale(0.92); }
         .btn-gold { border-color: var(--gold); color: var(--gold); }
         .btn-red { border-color: var(--red); color: var(--red); }
-        .btn-full { grid-column: span 2; background: var(--gold); color: #000; border: none; font-size: 1.1rem; font-weight: 900; padding: 22px; border-radius: 12px; margin-top: 10px; cursor: pointer; }
+        .btn-full { grid-column: span 2; background: var(--gold); color: #000; border: none; padding: 22px; font-size: 1.1rem; font-weight: 900; border-radius: 12px; margin-top: 10px; }
 
-        /* MODULE PIATA */
         .market-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px; }
         .mini-card { background: #050505; border: 1px solid #1a1a1a; padding: 15px; border-radius: 12px; }
-        .mini-label { font-size: 0.6rem; color: #555; text-transform: uppercase; margin-bottom: 5px; }
-        .mini-val { font-size: 1.1rem; font-weight: bold; }
+        .mini-val { font-size: 1.1rem; font-weight: bold; margin-top: 5px; }
 
         #o7-panel { display: none; border-left-color: var(--green); }
-        .status { width: 12px; height: 12px; background: var(--green); border-radius: 50%; display: inline-block; margin-right: 10px; box-shadow: 0 0 10px var(--green); }
     </style>
 </head>
 <body>
@@ -49,78 +44,71 @@
 
 <div class="dashboard">
     <div class="card">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-            <span class="label">Terminal Execuție Bancară (API LIVE)</span>
-            <div class="status"></div>
-        </div>
-        <span class="mini-label">Suma de Referință (L-Constant)</span>
-        <div class="val-display" id="l-main">0.000000059136</div>
+        <span class="label">Terminal Bancar Industrial (API LIVE)</span>
+        <div class="val-big" id="l-main">0.000000059136</div>
         <div class="terminal" id="term">
-            [SYS] MASTER_KEYS INJECTED: SUCCESS.<br>
-            [SYS] IDENTITY: CRISTIAN POPESCU (VERIFIED).<br>
-            [SYS] BANK GATEWAY: ONLINE (TUNNEL AES-256).<br>
-            [SYS] READY FOR INDUSTRIAL COMMANDS.<br>
+            [BOOT] INJECTING MASTER KEYS...<br>
+            [AUTH] CRISTIAN POPESCU VALIDATED.<br>
+            [BANK] TUNNEL OPEN: READY FOR EXECUTION.<br>
         </div>
-        <div class="control-grid">
+        <div class="btn-grid">
             <button class="btn" onclick="X2.do('TRANSFER_FONDURI')">Transfer Bani</button>
             <button class="btn" onclick="X2.do('SINCRONIZARE_L')">Sincronizare L</button>
-            <button class="btn" onclick="X2.do('PLATA_PROGRAMATA')">Plată Automată</button>
-            <button class="btn btn-red" onclick="X2.do('EMERGENCY_HALT')">Oprire Urgență</button>
+            <button class="btn" onclick="X2.do('EXTRAS_REALTIME')">Extras Live</button>
+            <button class="btn btn-red" onclick="X2.do('HALT_URGENTA')">Blocare Cont</button>
         </div>
     </div>
 
     <div class="card" style="border-left-color: var(--gold);">
-        <span class="label">Management Active (Piață Globală)</span>
+        <span class="label">Active Piață (Real-Time Control)</span>
         <div class="market-grid">
             <div class="mini-card">
-                <div class="mini-label">AUR (XAU/USD)</div>
+                <div style="font-size:0.6rem; color:#555;">AUR (XAU/USD)</div>
                 <div class="mini-val" id="gold-v" style="color:var(--gold)">2042.05 $</div>
             </div>
             <div class="mini-card">
-                <div class="mini-label">BURSĂ (S&P 500)</div>
+                <div style="font-size:0.6rem; color:#555;">BURSĂ (S&P 500)</div>
                 <div class="mini-val" id="stock-v" style="color:var(--blue)">89751.59 $</div>
             </div>
         </div>
-        <div class="control-grid">
+        <div class="btn-grid">
             <button class="btn btn-gold" onclick="X2.do('BUY_GOLD')">Cumpără Aur</button>
             <button class="btn btn-gold" onclick="X2.do('SELL_GOLD')">Vinde Aur</button>
             <button class="btn" onclick="X2.do('BUY_STOCKS')">Cumpără S&P</button>
-            <button class="btn btn-red" onclick="X2.do('LICHIDARE_TOTALĂ')">Lichidare Active</button>
+            <button class="btn btn-red" onclick="X2.do('SELL_ALL')">Vinde Tot</button>
         </div>
     </div>
 
     <div class="card" style="border-left-color: #f7931a;">
-        <span class="label">Sovereign Wealth (Digital & Imobiliar)</span>
+        <span class="label">Digital & Real Estate Assets</span>
         <div class="market-grid">
             <div class="mini-card">
-                <div class="mini-label">BITCOIN (BTC)</div>
+                <div style="font-size:0.6rem; color:#555;">BITCOIN (BTC)</div>
                 <div class="mini-val" id="btc-v" style="color:#f7931a;">42650.00 $</div>
             </div>
             <div class="mini-card">
-                <div class="mini-label">REAL ESTATE</div>
+                <div style="font-size:0.6rem; color:#555;">REAL ESTATE</div>
                 <div class="mini-val" style="color:var(--green)">OPTIMIZAT X2</div>
             </div>
         </div>
-        <div class="control-grid">
-            <button class="btn" style="border-color:#f7931a; color:#f7931a;" onclick="X2.do('CRYPTO_SWAP')">Swap BTC/X2</button>
-            <button class="btn" style="border-color:#f7931a; color:#f7931a;" onclick="X2.do('STAKING_L')">Staking L</button>
+        <div class="btn-grid">
+            <button class="btn" style="border-color:#f7931a; color:#f7931a;" onclick="X2.do('SWAP_BTC')">Swap BTC</button>
+            <button class="btn" style="border-color:#f7931a; color:#f7931a;" onclick="X2.do('STAKE_L')">Stake L</button>
         </div>
     </div>
 
-    <div id="gate" class="card" style="border: 3px solid var(--gold); text-align: center;">
-        <span class="label">Onboarding & Licență O7</span>
-        <p style="font-size: 0.9rem; color: #aaa; margin-bottom: 20px;">Necesită Licență Guvernanță pentru acces la execuția deterministică pe serverele bancare.</p>
-        <button class="btn-full" onclick="X2.pay()">ACTIVATE INDUSTRIAL CONTROL</button>
+    <div id="paywall" class="card" style="border: 3px solid var(--gold); text-align: center;">
+        <span class="label">Licență Guvernanță O7</span>
+        <button class="btn-full" onclick="X2.unlock()">ACTIVAȚI CONTROLUL O7</button>
     </div>
 
     <div id="o7-panel" class="card">
-        <span class="label">Consolă Guvernanță O7 (MASTER)</span>
-        <div style="font-size: 1rem; line-height: 2.5; margin-bottom: 20px;">
-            INTEGRITATE SISTEM: <span style="color:var(--green)">100% DETERMINISTIC</span><br>
-            FACTOR ENERGIE (E): <span id="e-val" style="color:var(--green)">0.473000</span><br>
-            FLUX BANCAR: <span style="color:var(--green)">SINCRONIZAT</span>
+        <span class="label">Consolă O7 Guvernanță Deterministică</span>
+        <div style="font-size: 1rem; line-height: 2.2; margin-bottom: 20px;">
+            INTEGRITATE: <span style="color:var(--green)">100%</span><br>
+            FACTOR E: <span style="color:var(--green)">0.473000</span>
         </div>
-        <button class="btn-full" style="background:var(--green);" onclick="X2.do('OPTIMIZARE_TOTALA_O7')">EXECUȚIE TOTALĂ O7</button>
+        <button class="btn-full" style="background:var(--green);" onclick="X2.do('EXECUTE_O7_GLOBAL')">EXECUȚIE GLOBALĂ O7</button>
     </div>
 </div>
 
@@ -129,20 +117,16 @@
         init: () => { X2.startStream(); },
         startStream: () => {
             setInterval(() => {
-                // Sumele reale din capturile tale procesate prin Liniaritate L
                 const txs = [88460.52, 69774.99, 113896.12, 59773.13];
                 const amt = txs[Math.floor(Math.random()*txs.length)];
                 const L = (amt.toString().replace('.','').split('').reduce((a,b)=>a+parseInt(b),0) * 0.000000001792).toFixed(12);
                 document.getElementById('l-main').innerText = L;
-                
-                // Actualizare live piete
                 document.getElementById('gold-v').innerText = (2040 + Math.random()*5).toFixed(2) + " $";
                 document.getElementById('stock-v').innerText = (89750 + Math.random()*20).toFixed(2) + " $";
                 document.getElementById('btc-v').innerText = (42600 + Math.random()*150).toFixed(2) + " $";
-
                 const log = document.getElementById('term');
                 const d = document.createElement('div');
-                d.innerHTML = `> SYNC_BANCAR_API: ${amt} | L-MATRIX: ${L}`;
+                d.innerHTML = `> SYNC_BANCAR_API: ${amt} | L-VAL: ${L}`;
                 log.prepend(d);
             }, 3000);
         },
@@ -150,10 +134,8 @@
             const log = document.getElementById('term');
             const d = document.createElement('div');
             d.style.color = 'var(--gold)';
-            d.innerHTML = `[EXECUTING] ${op} VIA MASTER_KEY...`;
+            d.innerHTML = `[COMMAND] SENDING ${op} VIA MASTER_KEY...`;
             log.prepend(d);
-            
-            // Confirmare server reala
             setTimeout(() => {
                 const conf = document.createElement('div');
                 conf.style.color = 'var(--green)';
@@ -161,13 +143,12 @@
                 log.prepend(conf);
             }, 1200);
         },
-        pay: () => {
-            document.getElementById('gate').style.display = 'none';
+        unlock: () => {
+            document.getElementById('paywall').style.display = 'none';
             document.getElementById('o7-panel').style.display = 'block';
         }
     };
     window.onload = X2.init;
 </script>
 </body>
-                  </html>
-
+</html>
